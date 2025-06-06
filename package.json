@@ -2,10 +2,55 @@
   "name": "@df996/pixel-logic",
   "version": "1.0.0",
   "description": "",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "keywords": [],
   "author": "",
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "preinstall": "npx only-allow pnpm",
+    "lint": "lint-staged",
+    "lint:stylelint": "stylelint \"**/*.{vue,css,less.scss}\" --cache --fix",
+    "prepare": "husky install",
+    "commit": "cz",
+    "dev:vue": "pnpm -F @df996/vue3-project-template dev",
+    "build:vue": "pnpm -F @df996/vue3-project-template build"
+  },
+  "devDependencies": {
+    "@babel/eslint-parser": "^7.22.15",
+    "@commitlint/cli": "^17.7.1",
+    "@commitlint/config-conventional": "^17.7.0",
+    "@trivago/prettier-plugin-sort-imports": "^4.2.0",
+    "@vue/babel-plugin-jsx": "^1.1.5",
+    "autoprefixer": "^10.4.16",
+    "commitizen": "^4.3.0",
+    "cosmiconfig": "^9.0.0",
+    "cz-conventional-changelog": "^3.3.0",
+    "eslint": "^9.28.0",
+    "eslint-config-alloy": "^5.0.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-prettier": "^5.0.0",
+    "eslint-plugin-vue": "^9.17.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^14.0.1",
+    "prettier": "^3.0.0",
+    "prettier-plugin-tailwindcss": "^0.5.4",
+    "stylelint": "^16.16.0",
+    "stylelint-config-rational-order": "^0.1.2",
+    "stylelint-config-recommended-vue": "^1.6.0",
+    "stylelint-config-standard": "^38.0.0",
+    "stylelint-config-standard-scss": "^15.0.1",
+    "stylelint-order": "^6.0.3",
+    "stylelint-scss": "^6.12.0"
+  },
+  "lint-staged": {
+    "*.{js,vue}": [
+      "eslint --fix",
+      "prettier --write"
+    ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
 }

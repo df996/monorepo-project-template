@@ -15,10 +15,20 @@ ___
 
 ##### 运行：
 ```bash
-pnpm dev
+# 运行vue-project-example
+pnpm dev:vue
 ```
 
 ##### 编译：
 ```bash
+# 运行vue-project-example
 pnpm build
+```
+
+___
+
+
+#### 说明:
+```bash
+#配置运行、编译脚本参考根目录下的package.json中scripts内容
 ```

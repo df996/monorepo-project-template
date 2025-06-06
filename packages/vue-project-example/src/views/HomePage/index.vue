@@ -10,10 +10,14 @@
  ¦----------------------------------------------------->
 
 <template>
-  <div class="w-full h-full">vue3 project template</div>
+  <div class="w-full h-full">
+    {{ example.str }}
+  </div>
 </template>
 
 <script setup>
+import { example } from '@df996/common-example'
+
 /**
  * 组件选项
  */

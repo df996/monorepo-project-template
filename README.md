@@ -17,12 +17,18 @@ ___
 ```bash
 # 运行vue-project-example
 pnpm dev:vue
+
+# 运行uniapp-project-example
+pnpm dev:uniapp
 ```
 
 ##### 编译：
 ```bash
-# 运行vue-project-example
-pnpm build
+# 编译vue-project-example
+pnpm build:vue
+
+# 编译uniapp-project-example
+pnpm build:uniapp
 ```
 
 ___

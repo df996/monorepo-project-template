@@ -13,7 +13,9 @@
     "prepare": "husky install",
     "commit": "cz",
     "dev:vue": "pnpm -F @df996/vue3-project-template dev",
-    "build:vue": "pnpm -F @df996/vue3-project-template build"
+    "build:vue": "pnpm -F @df996/vue3-project-template build",
+    "dev:uniapp": "pnpm -F @df996/uniapp-project-example dev:mp-weixin",
+    "build:uniapp": "pnpm -F @df996/uniapp-project-example build:mp-weixin"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.22.15",

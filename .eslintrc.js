@@ -1,365 +1,476 @@
-javascript
 module.exports = {
-  // 标记为根配置文件，停止向上查找其他配置文件
+  // 当前是否根目录
   'root': true,
-
-  // 继承的规则集配置
-  'extends': [
-    // Alloy基础规则集
-    'alloy',
-    // Alloy的Vue规则扩展
-    'alloy/vue',
-    // Vue官方推荐的Vue3规则
-    'plugin:vue/vue3-recommended',
-    // Prettier格式化规则
-    'prettier'
-  ],
-
-  // 启用全局环境变量
+  // 拓展配置
+  'extends': ['alloy', 'alloy/vue', 'plugin:vue/vue3-recommended', 'prettier'],
+  // 环境变量配置
   'env': {
-    // 浏览器环境全局变量
+    // 浏览器环境
     'browser': true
-    // 'node': true,           // Node.js环境（已注释）
-    // 其他环境配置...
   },
-
-  // 解析器配置选项
+  // 解析器选项
   'parserOptions': {
-    // 使用ES模块语法
+    // 源码类型
     'sourceType': 'module',
+    // ECMAScript特性
     'ecmaFeatures': {
-      // 启用JSX语法支持
+      // 是否启用JSX
       'jsx': true
     }
   },
-
-  // 自定义全局变量配置
-  'globals': {
-    // 示例：'myGlobal': false  // 声明不可修改的全局变量
-  },
-
-  // 自定义规则配置
+  // 全局变量定义
+  'globals': {},
+  // 自定义规则
   'rules': {
-    // Vue相关规则
-    // 限制单行标签最多5个属性，多行标签每行最多1个属性
+    // Vue属性每行最大数量
     'vue/max-attributes-per-line': [
-      2,
+      0,
       {
+        // 单行最大属性数
         'singleline': 5,
+        // 多行配置
         'multiline': {
+          // 多行最大属性数
           'max': 1
         }
       }
     ],
-    // 关闭单行HTML元素内容换行规则
-    'vue/singleline-html-element-content-newline': 'off',
-    // 关闭多行HTML元素内容换行规则
-    'vue/multiline-html-element-content-newline': 'off',
-    // 关闭多单词组件名规则
-    'vue/multi-word-component-names': 'off',
-    // 关闭禁止修改props规则
-    'vue/no-mutating-props': 'off',
-    // 关闭禁止使用v-html指令规则
-    'vue/no-v-html': 'off',
-
-    // 通用JavaScript规则
-    // 函数参数最多6个
+    // 最大嵌套回调数
+    'max-nested-callbacks': [2, 6],
+    // 函数最大参数数量
     'max-params': ['error', 6],
-    // 最大循环复杂度40
+    // 圈复杂度限制
     'complexity': ['error', 40],
-    // 禁止重新赋值参数（允许props）
-    'no-param-reassign': ['error', { 'props': false }],
-    // 强制getter/setter成对出现
+    // 禁止参数重新赋值
+    'no-param-reassign': ['error', {
+      // 是否检查属性赋值
+      'props': false
+    }],
+    // 单行HTML元素内容换行规则
+    'vue/singleline-html-element-content-newline': 'off',
+    // 多行HTML元素内容换行规则
+    'vue/multiline-html-element-content-newline': 'off',
+    // Vue多单词组件名
+    'vue/multi-word-component-names': 'off',
+    // 禁止修改props
+    'vue/no-mutating-props': 'off',
+    // 允许使用v-html
+    'vue/no-v-html': 'off',
+    // 禁止无用的v-bind
+    'vue/no-useless-v-bind': [
+      'error',
+      {
+        // 是否忽略包含注释的绑定
+        'ignoreIncludesComment': false,
+        // 是否忽略字符串转义
+        'ignoreStringEscape': true
+      }
+    ],
+    // 禁止重复属性
+    'vue/no-duplicate-attributes': [
+      'error',
+      {
+        // 允许共存class
+        'allowCoexistClass': true,
+        // 允许共存style
+        'allowCoexistStyle': true
+      }
+    ],
+    // getter/setter成对规则
     'accessor-pairs': 2,
-    // 箭头函数箭头前后空格
+    // 箭头函数空格规则
     'arrow-spacing': [
       2,
-      { 'before': true, 'after': true }
+      {
+        // 箭头前空格
+        'before': true,
+        // 箭头后空格
+        'after': true
+      }
     ],
-    // 强制代码块前后空格
+    // 块级元素空格规则
     'block-spacing': [2, 'always'],
-    // 大括号风格配置
+    // 大括号风格
     'brace-style': [
       2,
       '1tbs',
-      { 'allowSingleLine': true }
+      {
+        // 允许单行
+        'allowSingleLine': true
+      }
     ],
-    // 驼峰命名规则配置
+    // 驼峰命名规则
     'camelcase': [
       0,
-      { 'properties': 'always' }
+      {
+        // 属性名规则
+        'properties': 'always'
+      }
     ],
-    // 禁止行尾逗号
+    // 对象/数组尾逗号
     'comma-dangle': [2, 'never'],
-    // 逗号前后空格配置
+    // 逗号空格规则
     'comma-spacing': [
       2,
-      { 'before': false, 'after': true }
+      {
+        // 逗号前无空格
+        'before': false,
+        // 逗号后有空格
+        'after': true
+      }
     ],
-    // 逗号风格（行尾）
+    // 逗号位置风格
     'comma-style': [2, 'last'],
-    // 强制super()在构造函数中调用
+    // 构造函数super调用
     'constructor-super': 2,
-    // 多行代码块强制使用大括号
+    // 强制大括号风格
     'curly': [2, 'multi-line'],
-    // 对象属性点号位置
+    // 点操作符位置
     'dot-location': [2, 'property'],
-    // 文件末尾强制换行
+    // 文件末尾空行
     'eol-last': 2,
-    // 强制使用===
-    'eqeqeq': ['error', 'always', { 'null': 'ignore' }],
-    // generator函数*号前后空格
+    // 相等比较规则
+    'eqeqeq': ['error', 'always', {
+      // null比较规则
+      'null': 'ignore'
+    }],
+    // generator函数空格
     'generator-star-spacing': [
       2,
-      { 'before': true, 'after': true }
+      {
+        // function关键字前空格
+        'before': true,
+        // function关键字后空格
+        'after': true
+      }
     ],
-    // 回调错误处理规则
+    // 错误回调处理
     'handle-callback-err': [2, '^(err|error)$'],
-    // 缩进配置（2空格，switch语句1空格）
+    // 缩进规则
     'indent': [
       2,
       2,
-      { 'SwitchCase': 1 }
+      {
+        // switch case缩进
+        'SwitchCase': 1
+      }
     ],
-    // JSX属性引号风格
+    // JSX引号风格
     'jsx-quotes': [2, 'prefer-single'],
-    // 对象字面量键值空格
+    // 键值对空格
     'key-spacing': [
       2,
-      { 'beforeColon': false, 'afterColon': true }
+      {
+        // 冒号前无空格
+        'beforeColon': false,
+        // 冒号后有空格
+        'afterColon': true
+      }
     ],
-    // 关键字前后空格
+    // 关键字空格
     'keyword-spacing': [
       2,
-      { 'before': true, 'after': true }
+      {
+        // 关键字前空格
+        'before': true,
+        // 关键字后空格
+        'after': true
+      }
     ],
-    // 构造函数命名规范配置
+    // new操作符风格
     'new-cap': [
       2,
-      { 'newIsCap': true, 'capIsNew': false }
+      {
+        // new后首字母小写
+        'newIsCap': false,
+        // 大写开头需用new
+        'capIsNew': false
+      }
     ],
-    // 强制new后带括号
+    // new操作符括号
     'new-parens': 2,
-    // 禁止使用Array构造函数
+    // 禁止数组构造器
     'no-array-constructor': 2,
-    // 禁止使用console（警告级别）
+    // 禁止arguments.caller/callee
+    'no-caller': 2,
+    // 禁止console
     'no-console': 'warn',
-    // 禁止修改class声明
+    // 禁止类名重定义
     'no-class-assign': 2,
-    // 禁止条件语句中的赋值
+    // 禁止条件语句赋值
     'no-cond-assign': 2,
-    // 禁止修改const变量
+    // 禁止const重新赋值
     'no-const-assign': 2,
-    // 允许控制字符正则
+    // 允许控制字符
     'no-control-regex': 0,
     // 禁止删除变量
     'no-delete-var': 2,
-    // 禁止重复参数
+    // 禁止函数重复参数
     'no-dupe-args': 2,
-    // 禁止重复class成员
+    // 禁止类成员重复
     'no-dupe-class-members': 2,
-    // 禁止重复对象键
+    // 禁止对象重复键
     'no-dupe-keys': 2,
-    // 禁止重复case标签
+    // 禁止case重复
     'no-duplicate-case': 2,
     // 禁止空字符类
     'no-empty-character-class': 2,
-    // 禁止空解构模式
+    // 禁止空解构
     'no-empty-pattern': 2,
     // 禁止eval
     'no-eval': 2,
-    // 禁止修改异常声明
+    // 禁止catch异常重赋值
     'no-ex-assign': 2,
     // 禁止扩展原生对象
     'no-extend-native': 2,
-    // 禁止不必要的bind
+    // 禁止不必要bind
     'no-extra-bind': 2,
-    // 禁止不必要的布尔转换
+    // 禁止不必要布尔转换
     'no-extra-boolean-cast': 2,
-    // 禁止不必要的括号（函数）
+    // 禁止不必要括号
     'no-extra-parens': [2, 'functions'],
-    // 禁止case穿透
+    // 禁止switch穿透
     'no-fallthrough': 2,
-    // 禁止浮点数字面量
+    // 禁止浮点小数
     'no-floating-decimal': 2,
-    // 禁止修改函数声明
+    // 禁止函数重定义
     'no-func-assign': 2,
     // 禁止隐式eval
     'no-implied-eval': 2,
-    // 禁止在代码块内声明函数
+    // 禁止嵌套声明
     'no-inner-declarations': [2, 'functions'],
-    // 禁止无效正则表达式
+    // 禁止无效正则
     'no-invalid-regexp': 2,
-    // 禁止不规则空格
+    // 禁止不合法空白符
     'no-irregular-whitespace': 2,
-    // 禁止__iterator__属性
+    // 禁止__iterator__
     'no-iterator': 2,
-    // 禁止标签与变量同名
+    // 禁止标签名与变量名相同
     'no-label-var': 2,
-    // 禁止标签声明
+    // 标签使用规则
     'no-labels': [
       2,
-      { 'allowLoop': false, 'allowSwitch': false }
+      {
+        // 允许循环标签
+        'allowLoop': false,
+        // 允许switch标签
+        'allowSwitch': false
+      }
     ],
-    // 禁止无用的代码块
+    // 禁止不必要块
     'no-lone-blocks': 2,
-    // 禁止混合空格和制表符
+    // 禁止混用空格和制表符
     'no-mixed-spaces-and-tabs': 2,
     // 禁止多个空格
     'no-multi-spaces': 2,
     // 禁止多行字符串
     'no-multi-str': 2,
-    // 禁止多行空行（最多1行）
+    // 禁止多行空行
     'no-multiple-empty-lines': [
       2,
-      { 'max': 1 }
+      {
+        // 最大空行数
+        'max': 1
+      }
     ],
-    // 禁止修改原生对象
+    // 禁止覆盖原生对象
     'no-native-reassign': 2,
-    // 禁止在in表达式中使用否定
+    // 禁止in操作符左侧取反
     'no-negated-in-lhs': 2,
-    // 禁止使用Object构造函数
+    // 禁止Object构造器
     'no-new-object': 2,
     // 禁止new require
     'no-new-require': 2,
-    // 禁止new Symbol
+    // 禁止Symbol构造器
     'no-new-symbol': 2,
-    // 禁止包装对象构造
+    // 禁止基本类型包装对象
     'no-new-wrappers': 2,
-    // 禁止将对象字面量作为函数调用
+    // 禁止调用Math/JSON
     'no-obj-calls': 2,
     // 禁止八进制字面量
     'no-octal': 2,
     // 禁止八进制转义
     'no-octal-escape': 2,
-    // 禁止__dirname拼接
+    // 禁止路径拼接
     'no-path-concat': 2,
-    // 禁止__proto__属性
+    // 禁止__proto__
     'no-proto': 2,
-    // 禁止重复声明
+    // 禁止变量重声明
     'no-redeclare': 2,
-    // 禁止正则表达式中的多个空格
+    // 禁止正则表达式空格
     'no-regex-spaces': 2,
-    // 禁止在return语句中赋值
+    // 禁止return中使用赋值
     'no-return-assign': [2, 'except-parens'],
-    // 禁止自我赋值
+    // 禁止自身赋值
     'no-self-assign': 2,
-    // 禁止自我比较
+    // 禁止自身比较
     'no-self-compare': 2,
     // 禁止逗号操作符
     'no-sequences': 2,
-    // 禁止覆盖受限标识符
+    // 禁止保留字作变量名
     'no-shadow-restricted-names': 2,
     // 禁止函数名与括号间空格
     'no-spaced-func': 2,
     // 禁止稀疏数组
     'no-sparse-arrays': 2,
-    // 禁止在super()前使用this
+    // 禁止super前使用this
     'no-this-before-super': 2,
     // 禁止抛出字面量
     'no-throw-literal': 2,
     // 禁止行尾空格
     'no-trailing-spaces': 2,
-    // 禁止将未定义变量初始化为undefined
+    // 禁止未定义变量初始化
     'no-undef-init': 2,
+    // 禁止意外多行
+    'no-unexpected-multiline': 2,
+    // 禁止未修改的循环条件
+    'no-unmodified-loop-condition': 2,
+    // 禁止不必要的三元表达式
+    'no-unneeded-ternary': [
+      2,
+      {
+        // 默认赋值规则
+        'defaultAssignment': false
+      }
+    ],
     // 禁止不可达代码
     'no-unreachable': 2,
-    // 禁止finally块中返回
+    // 禁止finally中return
     'no-unsafe-finally': 2,
-    // 禁止不必要的函数调用
+    // 禁止不必要call/apply
     'no-useless-call': 2,
-    // 禁止不必要的计算属性名
+    // 禁止不必要计算属性
     'no-useless-computed-key': 2,
-    // 禁止不必要的构造函数
+    // 禁止不必要构造函数
     'no-useless-constructor': 2,
-    // 允许不必要的转义
+    // 允许转义字符
     'no-useless-escape': 0,
-    // 禁止属性前的空格
+    // 禁止属性前空白符
     'no-whitespace-before-property': 2,
-    // 禁止with语句
+    // 禁用with语句
     'no-with': 2,
-    // 变量声明规则（禁止重复初始化）
+    // 变量声明规则
     'one-var': [
       2,
-      { 'initialized': 'never' }
+      {
+        // 已初始化变量声明方式
+        'initialized': 'never'
+      }
     ],
     // 操作符换行规则
     'operator-linebreak': [
       2,
       'after',
-      { 'overrides': { '?': 'before', ':': 'before' } }
+      {
+        // 三元操作符换行
+        'overrides': {
+          '?': 'before',
+          ':': 'before'
+        }
+      }
     ],
-    // 禁止块内填充空格
+    // 块内填充规则
     'padded-blocks': [2, 'never'],
-    // 引号风格配置
+    // 引号风格
     'quotes': [
       2,
       'single',
-      { 'avoidEscape': true, 'allowTemplateLiterals': true }
+      {
+        // 避免转义
+        'avoidEscape': true,
+        // 允许模板字符串
+        'allowTemplateLiterals': true
+      }
     ],
-    // 禁止分号
+    // 分号规则
     'semi': [2, 'never'],
-    // 分号前后空格
+    // 分号空格
     'semi-spacing': [
       2,
-      { 'before': false, 'after': true }
+      {
+        // 分号前无空格
+        'before': false,
+        // 分号后有空格
+        'after': true
+      }
     ],
-    // 代码块前空格
+    // 块前空格
     'space-before-blocks': [2, 'always'],
     // 函数括号前空格
     'space-before-function-paren': [2, 'never'],
     // 括号内空格
     'space-in-parens': [2, 'never'],
-    // 操作符周围空格
+    // 中缀操作符空格
     'space-infix-ops': 2,
     // 一元操作符空格
     'space-unary-ops': [
       2,
-      { 'words': true, 'nonwords': false }
+      {
+        // 单词类操作符空格
+        'words': true,
+        // 非单词类操作符空格
+        'nonwords': false
+      }
     ],
-    // 注释空格配置
+    // 注释空格
     'spaced-comment': [
       2,
       'always',
-      { 'markers': ['global', 'globals', 'eslint', 'eslint-disable', '*package', '!', ','] }
+      {
+        // 特殊标记
+        'markers': ['global', 'globals', 'eslint', 'eslint-disable', '*package', '!', ',']
+      }
     ],
     // 模板字符串空格
     'template-curly-spacing': [2, 'never'],
-    // 强制使用isNaN检查NaN
+    // 使用isNaN
     'use-isnan': 2,
-    // 强制有效的typeof比较值
+    // 有效typeof值
     'valid-typeof': 2,
-    // 立即执行函数表达式包装
+    // 立即执行函数括号
     'wrap-iife': [2, 'any'],
-    // yield* 前后空格
+    // yield*空格
     'yield-star-spacing': [2, 'both'],
-    // 禁止尤达条件表达式
+    // 禁止yoda条件
     'yoda': [2, 'never'],
-    // 优先使用const声明
+    // 优先使用const
     'prefer-const': 2,
     // 生产环境禁用debugger
     'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,
-    // 对象字面量花括号空格
+    // 对象花括号空格
     'object-curly-spacing': [
       2,
       'always',
-      { 'objectsInObjects': false }
+      {
+        // 对象内对象空格
+        'objectsInObjects': false
+      }
     ],
     // 数组括号空格
     'array-bracket-spacing': [2, 'never'],
-
-    // 关闭特定Vue规则
+    // Vue要求默认prop
     'vue/require-default-prop': 'off',
+    // 禁用未定义变量检查
+    'no-undef': 'off',
+    // 禁用未使用变量检查
+    'no-unused-vars': 'off',
+    // Vue解析错误
     'vue/no-parsing-error': 'off',
+    // Vue要求prop类型
     'vue/require-prop-types': 'off',
+    // Vue未使用变量
     'vue/no-unused-vars': 'off',
+    // Vue未使用组件
     'vue/no-unused-components': 'off',
+    // Vue模板作用域覆盖
     'vue/no-template-shadow': 'off',
+    // Vue属性简写
     'vue/prefer-true-attribute-shorthand': 'off',
-
-    // 关闭特定JS规则
+    // for-in循环检查
     'guard-for-in': 'off',
+    // 禁止模板字符串中的花括号
     'no-template-curly-in-string': 'off',
+    // 禁止未使用表达式
     'no-unused-expressions': 'off'
   }
 }
